@@ -1,7 +1,7 @@
 # FluidSim
 
+Phase 1: 
 Starting from a famous paper "Stable Fuilds" by Jos Stam, we used the theory given by the paper, we are able to generate a simple version of fluid simumation. 
-
 
 ![Screenshot 2023-11-29 at 14 09 57](https://github.com/Feng-Jiang28/FluidSim/assets/106386742/d5414692-a040-4982-a55d-c4777fc17dee)
 
@@ -69,3 +69,12 @@ Additionally, there are two subroutines:
 set_bnd (Set Bounds): This subroutine acts as a boundary condition, preventing the fluid from "leaking" out of the simulated area. It does this by mirroring the velocities at the edges, creating a wall-like effect.
 
 lin_solve (Linear Solver): A function used in both the diffusion and projection steps. It solves linear equations related to these processes, although the exact workings might be complex and not fully understood by the implementer.
+
+![ezgif com-video-to-gif](https://github.com/Feng-Jiang28/FluidSim/assets/106386742/72acbe95-6bef-45e9-b595-e3c38e9e9add)
+
+
+
+Phase 2:
+
+In phase 2, we are trying to implement a fluid simulation a CPU with OpenMP and GPU with CUDA, and compared the performance of the two implementations. 
+
