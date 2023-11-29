@@ -106,13 +106,12 @@ To optimize the fluid simulation using both OpenMP and CUDA, we can follow a str
 1. Identify Parallelizable Components
 Fluid Dynamics Operations: Most operations in fluid dynamics (like advection, diffusion, projection) are inherently parallelizable as they involve calculations on grid cells that can often be done independently.
 
-Mouse Interaction Handling: The processing of mouse events, especially when rendering every pixel in response to mouse movements, is another area where parallel processing can be beneficial.
-3. CUDA Implementation
+2. CUDA Implementation
 
 Memory Management: Transfer all necessary arrays (velocity, density, etc.) to the GPU's device memory.
+
 Kernel Design:
 Grid Cell Operations: Implement CUDA kernels for each operation (advection, diffusion, projection). Use a grid of 16x16 thread blocks for efficient processing.
-Mouse Interaction: Implement a kernel to handle mouse press events for each pixel. Given the relatively small number of mouse segments compared to the number of pixels, a kernel per pixel with a loop for each segment is more efficient.
 
 Shared Memory Utilization: Use shared memory within thread blocks to speed up operations that involve neighboring cells, reducing global memory access.
 Synchronization: Ensure proper synchronization between kernel executions to maintain data consistency, especially where operations have dependencies.
@@ -122,21 +121,6 @@ CPU Parallelism: Use OpenMP for parts of the simulation that remain on the CPU. 
 Loop Parallelization: Apply OpenMP pragmas to parallelize loops, especially in pre-processing or post-processing stages of the simulation.
 Thread Management: Control the number of threads and manage workload distribution among them using OpenMP directives.
 
-5. Hybrid Approach
-Load Balancing: Determine the workload balance between the CPU and GPU. Offload heavy computational tasks to the GPU while utilizing the CPU for tasks that are less parallelizable or require frequent synchronization.
+5. Data Transfer Optimization: Minimize data transfer between the CPU and GPU. Only transfer essential data to reduce overhead.
 
-Data Transfer Optimization: Minimize data transfer between the CPU and GPU. Only transfer essential data to reduce overhead.
-
-6. Optimization and Tuning
-Performance Profiling: Use tools like NVIDIA Nsight and OpenMP profiling tools to identify bottlenecks.
-Kernel Optimization: Optimize CUDA kernels by tuning block sizes, reducing warp divergence, and optimizing memory access patterns.
-Dynamic Adjustment: Implement dynamic adjustment of workload distribution based on the current performance metrics.
-
-7. Testing and Validation
-Correctness: Ensure that the parallelized version of the simulation produces correct results. This involves comparing outputs with the serial version.
-Performance Testing: Measure the performance improvements in terms of simulation speed and responsiveness, especially for real-time interaction.
-
-8. Documentation and Maintenance
-Code Documentation: Document the changes and architecture clearly, explaining how OpenMP and CUDA are integrated.
-Maintainability: Ensure the code remains maintainable and modular to facilitate future updates or optimizations.
 
