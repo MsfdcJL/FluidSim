@@ -108,19 +108,20 @@ Fluid Dynamics Operations: Most operations in fluid dynamics (like advection, di
 
 2. CUDA Implementation
 
-Memory Management: Transfer all necessary arrays (velocity, density, etc.) to the GPU's device memory.
+    Memory Management: Transfer all necessary arrays (velocity, density, etc.) to the GPU's device memory.
 
-Kernel Design:
-Grid Cell Operations: Implement CUDA kernels for each operation (advection, diffusion, projection). Use a grid of 16x16 thread blocks for efficient processing.
+    Kernel Design:
+    Grid Cell Operations: Implement CUDA kernels for each operation (advection, diffusion, projection). Use a grid of 16x16 thread blocks for efficient processing.
 
-Shared Memory Utilization: Use shared memory within thread blocks to speed up operations that involve neighboring cells, reducing global memory access.
-Synchronization: Ensure proper synchronization between kernel executions to maintain data consistency, especially where operations have dependencies.
+    Shared Memory Utilization: Use shared memory within thread blocks to speed up operations that involve neighboring cells, reducing global memory access.
+    Synchronization: Ensure proper synchronization between kernel executions to maintain data consistency, especially where operations have dependencies.
 
-4. OpenMP Integration
+3. OpenMP Integration
 CPU Parallelism: Use OpenMP for parts of the simulation that remain on the CPU. This can include initialization routines, setting up data structures, or handling tasks not offloaded to the GPU.
 Loop Parallelization: Apply OpenMP pragmas to parallelize loops, especially in pre-processing or post-processing stages of the simulation.
 Thread Management: Control the number of threads and manage workload distribution among them using OpenMP directives.
 
-5. Data Transfer Optimization: Minimize data transfer between the CPU and GPU. Only transfer essential data to reduce overhead.
+4. Data Transfer Optimization: Minimize data transfer between the CPU and GPU. Only transfer essential data to reduce overhead.
+   
 
 
