@@ -72,9 +72,27 @@ lin_solve (Linear Solver): A function used in both the diffusion and projection 
 
 ![ezgif com-video-to-gif](https://github.com/Feng-Jiang28/FluidSim/assets/106386742/72acbe95-6bef-45e9-b595-e3c38e9e9add)
 
-
+The implementation of fluid simulation as described, while effective for demonstrating the principles of fluid dynamics in a 3D environment, does have some computational limitations.
+1. High Computational Load:
+Fluid simulation involves complex calculations for each cell in the fluid grid for every simulation step. This includes solving differential equations and updating the properties (like velocity and density) of each cell based on its interactions with neighboring cells.
+2. Numerical Methods:
+The implementation uses numerical methods (like the linear solver) that require iterative calculations. These methods can be computationally expensive, especially for high-resolution simulations.
+3. Real-Time Performance:
+Achieving real-time performance in fluid simulations is challenging, particularly for simulations with a large number of cells or high complexity.
+4. Serial Computation:
+The basic implementation as described is serial in nature, meaning each calculation is done one after the other. This approach doesn't efficiently utilize modern multi-core processors or parallel processing capabilities of GPUs.
 
 Phase 2:
 
 In phase 2, we are trying to implement a fluid simulation a CPU with OpenMP and GPU with CUDA, and compared the performance of the two implementations. 
+OpenMP (Open Multi-Processing):
+
+It allows the fluid simulation to utilize multiple cores of a CPU efficiently.
+By dividing the simulation grid and processing multiple parts simultaneously, OpenMP can significantly reduce the time required for each simulation step.
+
+CUDA (Compute Unified Device Architecture):
+
+GPUs are highly efficient at handling parallel tasks due to their large number of cores designed for handling graphics operations.
+Fluid simulations can benefit greatly from CUDA as it allows distributing the computation across thousands of small, efficient cores in the GPU, drastically speeding up the simulation process.
+
 
