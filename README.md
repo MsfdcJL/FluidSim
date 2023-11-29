@@ -14,7 +14,8 @@ The focus is on incompressible fluids (like water) rather than compressible ones
 To visualize fluid movement, a dye is added, and its density variation helps in observing the motion.
 
 Data Structures(C)
-`
+
+
 struct FluidCube {
     int size;
     float dt;
@@ -32,6 +33,6 @@ struct FluidCube {
     float *Vy0;
     float *Vz0;
 };
-`
+
 <img width="400" alt="image" src="https://github.com/Feng-Jiang28/FluidSim/assets/106386742/a6d2df98-ddaf-4c5d-8e70-75be99497eb2">
 
