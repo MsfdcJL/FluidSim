@@ -14,7 +14,7 @@ The focus is on incompressible fluids (like water) rather than compressible ones
 To visualize fluid movement, a dye is added, and its density variation helps in observing the motion.
 
 Data Structures(C)
-
+```
 struct FluidCube {
     int size;
     float dt;
@@ -33,15 +33,17 @@ struct FluidCube {
     float *Vz0;
 };
 typedef struct FluidCube FluidCube;
-
+```
 Since this just initializes a motionless cube with no dye, we need a way both to add some dye:
+```
 void FluidCubeAddDensity(FluidCube *cube, int x, int y, int z, float amount)
 {
     int N = cube->size;
     cube->density[IX(x, y, z)] += amount;
 }
-
+```
 And to add some velocity:
+```
 void FluidCubeAddVelocity(FluidCube *cube, int x, int y, int z, float amountX, float amountY, float amountZ)
 {
     int N = cube->size;
@@ -51,6 +53,7 @@ void FluidCubeAddVelocity(FluidCube *cube, int x, int y, int z, float amountX, f
     cube->Vy[index] += amountY;
     cube->Vz[index] += amountZ;
 }
+```
 
 Simulation Outline
 There are three main operations that we'll use to perform a simulation step.
