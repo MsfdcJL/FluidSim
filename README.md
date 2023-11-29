@@ -15,7 +15,6 @@ To visualize fluid movement, a dye is added, and its density variation helps in 
 
 Data Structures(C)
 
-
 struct FluidCube {
     int size;
     float dt;
@@ -33,6 +32,37 @@ struct FluidCube {
     float *Vy0;
     float *Vz0;
 };
+typedef struct FluidCube FluidCube;
 
-<img width="400" alt="image" src="https://github.com/Feng-Jiang28/FluidSim/assets/106386742/a6d2df98-ddaf-4c5d-8e70-75be99497eb2">
+Since this just initializes a motionless cube with no dye, we need a way both to add some dye:
+void FluidCubeAddDensity(FluidCube *cube, int x, int y, int z, float amount)
+{
+    int N = cube->size;
+    cube->density[IX(x, y, z)] += amount;
+}
 
+And to add some velocity:
+void FluidCubeAddVelocity(FluidCube *cube, int x, int y, int z, float amountX, float amountY, float amountZ)
+{
+    int N = cube->size;
+    int index = IX(x, y, z);
+    
+    cube->Vx[index] += amountX;
+    cube->Vy[index] += amountY;
+    cube->Vz[index] += amountZ;
+}
+
+Simulation Outline
+There are three main operations that we'll use to perform a simulation step.
+
+Diffuse: This operation simulates the spreading out of substances in the fluid, like dye in water. It applies to both the dye and the fluid's velocities, representing how they naturally disperse over time.
+
+Project: This step ensures the simulation adheres to the principle of incompressibility. It adjusts the fluid in each cell so that the volume remains constant, correcting any imbalances caused by other operations.
+
+Advect: This process simulates the movement of the fluid and the dye within it, driven by the velocities of each cell. It affects both the dye and the fluid's motion.
+
+Additionally, there are two subroutines:
+
+set_bnd (Set Bounds): This subroutine acts as a boundary condition, preventing the fluid from "leaking" out of the simulated area. It does this by mirroring the velocities at the edges, creating a wall-like effect.
+
+lin_solve (Linear Solver): A function used in both the diffusion and projection steps. It solves linear equations related to these processes, although the exact workings might be complex and not fully understood by the implementer.
