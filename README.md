@@ -13,8 +13,8 @@ Each cell has properties like velocity and density. For practicality, simulation
 The focus is on incompressible fluids (like water) rather than compressible ones (like air), as they are easier to simulate with constant density and pressure. 
 To visualize fluid movement, a dye is added, and its density variation helps in observing the motion.
 
-Data Structures(C):
-
+Data Structures(C)
+`
 struct FluidCube {
     int size;
     float dt;
@@ -32,6 +32,6 @@ struct FluidCube {
     float *Vy0;
     float *Vz0;
 };
-
+`
 <img width="400" alt="image" src="https://github.com/Feng-Jiang28/FluidSim/assets/106386742/a6d2df98-ddaf-4c5d-8e70-75be99497eb2">
 
