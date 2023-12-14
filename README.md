@@ -124,4 +124,18 @@ Thread Management: Control the number of threads and manage workload distributio
 4. Data Transfer Optimization: Minimize data transfer between the CPU and GPU. Only transfer essential data to reduce overhead.
    
 
+Implementation:
+
+![image](https://github.com/Feng-Jiang28/FluidSim/assets/106386742/c795d795-1c22-4b4f-8b14-ca626c997a60)
+
+We implement the code based on open-source project, then we managed to be able to display the image above. Using Cuda, Open GL, on discovery platform. 
+
+The config on dicovery consumed us a very long time. 
+
+the library can be seen thru our makefile
+
+![image](https://github.com/Feng-Jiang28/FluidSim/assets/106386742/e40e1780-34e1-4b18-ab0b-f5cd86d804fe)
+
+If you can config the lib above you will be able to compile and run our project. 
+
 
